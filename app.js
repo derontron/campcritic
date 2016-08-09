@@ -2,8 +2,11 @@ var express    = require("express"),
     ejs        = require("ejs"),
     app        = express(),
     bodyParser = require("body-parser"),
-    mongoose   = require("mongoose");
+    mongoose   = require("mongoose"),
+    Campground = require("./models/campground"),
+    seedDB     = require("./seeds")
 
+seedDB();
 mongoose.connect("mongodb://localhost/campcritic")
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -14,8 +17,6 @@ var campgroundSchema = new mongoose.Schema({
   image: String,
   description: String
 });
-
-var Campground = mongoose.model("Campground", campgroundSchema);
 
 // Campground.create(
 //       {
